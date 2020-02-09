@@ -26,3 +26,20 @@ def solution(progresses, speeds):
 
 
 print(solution([93,10,55], [3,30,5]),solution([93,30,55], [1,30,5]) == [2,1])
+
+
+string = "hello"
+print(list(string))
+
+
+
+
+
+
+
+
+
+
+
+
+

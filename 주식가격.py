@@ -1,21 +1,29 @@
 def solution(prices):
-    answer = []
-    while prices:
-        test = prices.pop(0)
-        down = False
-        for i,val in enumerate(prices):
-            if val < test:
-                answer.append(i+1)
-                down = True
-                break
-        if not down:
-            answer.append(len(prices))
+    answer = [1] * len(prices)
+    answer[-1] = 0
+
+    _list = list(reversed(prices))
+    _min = 10000
+
+    for idx, val in enumerate(_list):
+        if _min >= val:
+            answer[idx] = idx
+            _min = val
+
+        else:
+            if _list[idx - 1] >= val:
+                answer[idx] = answer[idx - 1] + 1
+            else:
+                answer[idx] = 1
 
 
-    return answer
+
+
+    return list(reversed(answer))
 
 
 
 
 
 print(solution([1, 2, 3, 2, 3]),solution([1, 2, 3, 2, 3]) == [4, 3, 1, 1, 0])
+print(solution([1,4,2,2,1]))

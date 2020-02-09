@@ -1,22 +1,27 @@
 def solution(bridge_length, weight, truck_weights):
-    answer = 0
+    answer = 1
+    onload = truck_weights[0]
+    b = [0]*(bridge_length-1) +[truck_weights.pop(0)]
+    # truck_weights = sorted(truck_weights,reverse=True)
+    print(b)
+    while truck_weights:
+        if onload + truck_weights[0] > weight:
+            i = 0
+            while b[i] == 0:
+                i+=1
+            onload -= b[i]
+            b = b[i+1:] + [0]*(i+1)
+            print(b, onload)
+            answer += i+1
 
-    b = [0]*bridge_length
-    truck_weights = sorted(truck_weights,reverse=True)
+        else:
+            t = b.pop(0)
+            onload -= t
+            b.append(truck_weights.pop(0))
+            print(b)
+            answer += 1
 
-    while b:
-        b.pop(0)
-        answer += 1
-        if truck_weights:
-            if sum(b) + truck_weights[0] <= weight:
-                b.append(truck_weights[0])
-                del truck_weights[0]
-            else:
-                b.append(0)
-
-
-
-
+    answer += bridge_length
 
 
     return answer
